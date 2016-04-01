@@ -1,6 +1,6 @@
 {
   "name": "sails-hook-blueprint-filters",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "custom blueprint hook to get filterable fields in a model",
   "main": "index.js",
   "scripts": {
