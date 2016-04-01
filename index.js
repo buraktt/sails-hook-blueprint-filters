@@ -9,37 +9,39 @@ const blueprintFilters = function(request, response) {
 	if ( !Model ) throw new Error(util.format('Invalid route option, "model".\nI don\'t know about any models named: `%s`',model));
 
 	var filters = [];
-	_.forEach(Model.attributes, function(attribute, attributeName) {
+	if(Model.filters){
+		_.forEach(Model.attributes, function(attribute, attributeName) {
 
-		var modelFilter = Model.filters[attributeName];
+			var modelFilter = Model.filters[attributeName];
 
-		if(!attribute.protected && modelFilter){
+			if(!attribute.protected && modelFilter){
 
-			var filter ={
-				name: attributeName,
-				text: modelFilter
+				var filter ={
+					name: attributeName,
+					text: modelFilter
+				}
+
+				if(attribute.type){
+					filter.type = attribute.type;
+				}
+
+				if(attribute.minLength){
+					filter.minLength = attribute.minLength;
+				}
+
+				if(attribute.maxLength){
+					filter.maxLength = attribute.maxLength;
+				}
+
+				if(attribute.enum){
+					filter.enum = attribute.enum;
+				}
+
+				filters.push(filter);
 			}
 
-			if(attribute.type){
-				filter.type = attribute.type;
-			}
-
-			if(attribute.minLength){
-				filter.minLength = attribute.minLength;
-			}
-
-			if(attribute.maxLength){
-				filter.maxLength = attribute.maxLength;
-			}
-
-			if(attribute.enum){
-				filter.enum = attribute.enum;
-			}
-
-			filters.push(filter);
-		}
-
-	});
+		});
+	}
 	return response.ok({filters: filters})
 
 };
@@ -48,7 +50,6 @@ module.exports = function (sails) {
   return {
       initialize: function(callback) {
 
-      	console.log('kelle');
         var config = sails.config.blueprints;
         var blueprintFiltersFunction = _.get(sails.middleware, 'blueprints.filters') || blueprintFilters;
 
@@ -75,4 +76,3 @@ module.exports = function (sails) {
       }
   }
 };
-
