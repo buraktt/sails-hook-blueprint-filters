@@ -1,6 +1,6 @@
 {
   "name": "sails-hook-blueprint-filters",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "custom blueprint hook to get filterable fields in a model",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "url": "https://github.com/buraktt/sails-hook-blueprint-filters/issues"
   },
   "homepage": "https://github.com/buraktt/sails-hook-blueprint-filters#readme",
-    "dependencies": {
+  "dependencies": {
     "lodash": "3.10.1",
     "merge-defaults": "0.2.1",
     "pluralize": "1.2.1"
